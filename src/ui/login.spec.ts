@@ -1,4 +1,5 @@
 import { test } from "../../src/fixtures/page-fixtures";
+import { invalidLoginCases } from "../test-data/login-cases";
 
 test.describe("Login", () => {
   test("gecerli kullanici ile giris yapar ve urun listesini gorur", async ({ loginPage, inventoryPage }) => {
@@ -10,9 +11,11 @@ test.describe("Login", () => {
     await inventoryPage.expectItemCount(6);
   });
 
-  test("gecersiz sifre ile hata mesaji gorunur", async ({ loginPage }) => {
+  for(const {username, password, label} of invalidLoginCases){
+  test(`basarisiz giris: ${label}`, async ({ loginPage }) => {
     await loginPage.open();
-    await loginPage.login(process.env.SAUCE_USERNAME!, "yanlis_sifre");
+    await loginPage.login(username, password);
     await loginPage.expectErrorVisible();
   });
+}
 });
