@@ -2,7 +2,7 @@ import { test } from "../../src/fixtures/page-fixtures";
 import { invalidLoginCases } from "../test-data/login-cases";
 
 test.describe("Login", () => {
-  test("gecerli kullanici ile giris yapar ve urun listesini gorur", async ({ loginPage, inventoryPage }) => {
+  test("gecerli kullanici ile giris yapar ve ürün listesini gorur", async ({ loginPage, inventoryPage }) => {
     await loginPage.open();
     await loginPage.login(
       process.env.SAUCE_USERNAME!,
